@@ -1,0 +1,10 @@
+<html>
+<body>
+<h1> Pose List </h1>
+{% for pose in poses %}
+<h2> {{pose.english_name}} </h2>
+<p> {{pose.register_date}} </p>
+<img src={{pose.pose_image.url}} >
+{% endfor %}
+</body>
+</html>
