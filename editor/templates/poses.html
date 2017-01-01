@@ -8,7 +8,7 @@
         <script src="/static/node_modules/jquery/dist/jquery.min.js"></script>
         <script src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <style>
-        ul.nav-pills {position:fixed}
+        /*ul.nav-pills {position:fixed} */
         #myPoses {overflow-y: scroll; position:fixed; }
         #mySeqs {overflow-y: scroll; }
         .myround {border-radius: 100%; }
@@ -19,6 +19,18 @@
             function init()
             {
                 panelResize();
+                $('.navbar').on('show.bs.collapse', function () {
+                        var actives = $(this).find('.collapse.in'),
+                        hasData;
+
+                        if (actives && actives.length) 
+                        {
+                        hasData = actives.data('collapse')
+                        if (hasData && hasData.transitioning) return
+                        actives.collapse('hide')
+                        hasData || actives.data('collapse', null)
+                        }
+                });
             }
 
             function panelResize()
@@ -53,25 +65,46 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" id="topbar">
             <div class="container">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#user-nav" aria-expanded="false" aria-control="navbar" style="">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <!--<span class="glyphicon glyphicon-user" style="color:#fff"></span> -->
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#yoga-nav" aria-expanded="false" aria-control="navbar">
+                        <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">YogaFire</a>
+                    <p class="navbar-text">Name</p>
                 </div>
                 <div id="yoga-nav" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="">Edit Pose</a></li>
-                        <li><a href="">Edit Seq</a></li>
+                        <li><a href="">View</a></li>
+                        <li class="drowdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">New..<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="">Class</a></li>
+                                <li><a href="">Lesson</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div id="user-nav" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="">Logout</a></li>
+                        <li><a href="">Help</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="container">
             <div class="row" style="padding-top:50px; ">
-                <div id="myPosesOuter" class="col-sm-3 col-xs-4" align="center" style="background-color:#f5f5f5; padding-bottom:60px; padding-left:0px; padding-right:0px;" height=1000px>
-                    <div id="myPoses" style="">
+                <div id="myPosesOuter" class="col-sm-3 col-xs-4" align="center" style="padding-bottom:60px; padding-left:0px; padding-right:0px;">
+                    <div id="myPoses" style="background-color:#f5f5f5; ">
                         <style  onload="initMyPoses();">
                         </style>
                         <ul class="nav">
@@ -88,7 +121,7 @@
                     </div>
                 </div>
                 <div class="col-sm-9 col-xs-8" id="mySeqs" align="center" onload="initMySeqs()" style="padding-bottom:60px;">
-                    <h3> Seq List </h3>
+                    <h3> Class Name - Seq Name </h3>
                     <ul class="nav">
                             <li>
                                 <p>

@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'yogafire',
-        'USER': 'xxxxxxxxxx',
-        'PASSWORD': 'xxxxxxxxxx',
+        'USER': 'yoga_manager',
+        'PASSWORD': 'babylon5',
     }
 }
 
